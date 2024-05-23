@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Navigation System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Navigation System</h1>
+        <form id="city-form">
+            <input type="text" id="city" name="city" placeholder="Enter city name" required>
+            <button type="submit">Generate Weather Data</button>
+        </form>
+        <div id="results">
+            <h2>Scenarios</h2>
+            <ul id="scenarios"></ul>
+            <h2>Route Planning</h2>
+            <div id="route"></div>
+        </div>
+        <div>
+            <h2>Select Weather Scenario</h2>
+            <select id="scenario-select">
+                <option value="Clear">Clear</option>
+                <option value="Fog">Fog</option>
+                <option value="Snow">Snow</option>
+                <option value="Rain">Rain</option>
+                <option value="Clouds">Clouds</option>
+                <option value="HighWind">High Wind</option>
+            </select>
+            <button id="select-button">Select Scenario</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
