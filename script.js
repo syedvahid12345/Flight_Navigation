@@ -9,7 +9,15 @@ document.getElementById('select-button').addEventListener('click', function() {
     const selectedScenario = document.getElementById('scenario-select').value;
     console.log(`Selected scenario: ${selectedScenario}`);
     const mockWeatherData = generateMockWeatherData(selectedScenario);
-    displayScenarios(mockWeatherData);
+    if (isGPSCheckEnabled()) {
+        if (checkGPSAvailability()) {
+            displayScenarios(mockWeatherData);
+        } else {
+            printEmergencyAlert();
+        }
+    } else {
+        displayScenarios(mockWeatherData);
+    }
 });
 
 const API_KEY = 'aed9fea3dd2e8a0c77d7ff978f7cc4e4';
@@ -21,7 +29,15 @@ async function getWeatherData(city) {
         }
         const data = await response.json();
         console.log('Weather data:', data);  // Debugging log
-        displayScenarios(data);
+        if (isGPSCheckEnabled()) {
+            if (checkGPSAvailability()) {
+                displayScenarios(data);
+            } else {
+                printEmergencyAlert();
+            }
+        } else {
+            displayScenarios(data);
+        }
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
@@ -87,3 +103,21 @@ function generateMockWeatherData(scenario) {
     };
     return mockData;
 }
+
+function checkGPSAvailability() {
+    // Simulate GPS check (true if available, false if unavailable)
+    const gpsAvailable = Math.random() > 0.2; // 80% chance GPS is available
+    console.log(`GPS availability: ${gpsAvailable ? 'Available' : 'Unavailable'}`);
+    return gpsAvailable;
+}
+
+function printEmergencyAlert() {
+    console.error('Emergency Alert: GPS is unavailable! Sending message to airline department.');
+    // Simulate sending a message to the airline department
+    alert('Emergency Alert: GPS is unavailable! Notifying airline department.');
+}
+
+function isGPSCheckEnabled() {
+    return document.getElementById('gps-check').checked;
+}
+
